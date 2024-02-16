@@ -19,10 +19,12 @@
     <title>Halaman Utama</title>
 </head>
 <body>
-    <h2>Halaman utama <?php echo $username; ?>!</h2>
-    <a href="data/dsperpustakaan.php">| Perpustakaan |</a>
-    <a href="data/dsguru.php">Data Guru |</a>
-    <a href="#">Data Siswa |</a>
+    <h2>Halaman utama <?php echo $username; ?>!</h2> 
+    | <a href="data/dsperpustakaan.php"> Perpustakaan </a>|
+    <a href="data/dsguru.php"> Data Guru </a>|
+    <a href="#"> Data Siswa </a>|
+    <a href="#"> Data Kelas </a>|
+    <a href="data/dsmapel.php">Mata Pelajaran </a>|
 
 </body>
 <br><br><a href="../../logout.php">| Logout |</a>

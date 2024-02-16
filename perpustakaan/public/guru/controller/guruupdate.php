@@ -9,7 +9,7 @@
         }
 
         public function updateGuru($id, $nama, $alamat, $email, $no_hp) {
-            $result = mysqli_query($this->kon, "UPDATE guru SET id = '$id', nama = '$nama', alamat = '$alamat', email = '$email', no_hp = '$no_hp' WHERE id = '$id'");
+            $result = mysqli_query($this->kon, "UPDATE guru SET nama = '$nama', alamat = '$alamat', email = '$email', no_hp = '$no_hp' WHERE idguru = '$id'");
 
             if ($result) {
                 return "Data Berhasil";
@@ -19,7 +19,7 @@
         }
 
         public function getDataGuru($id) {
-            $sql = "SELECT * FROM guru WHERE id = '$id'";
+            $sql = "SELECT * FROM guru WHERE idguru = '$id'";
             $ambilData = $this->kon->query($sql);
             
             if ($result = mysqli_fetch_array($ambilData)) {

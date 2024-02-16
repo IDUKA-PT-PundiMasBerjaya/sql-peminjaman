@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 12, 2024 at 10:36 AM
+-- Generation Time: Feb 16, 2024 at 05:39 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -36,6 +36,17 @@ CREATE TABLE `buku` (
   `gambar` varchar(100) DEFAULT NULL,
   `matapelajaran_idpelajaran` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `buku`
+--
+
+INSERT INTO `buku` (`id_buku`, `judul`, `penulis`, `keterangan`, `stok`, `gambar`, `matapelajaran_idpelajaran`) VALUES
+(1, '7 Keajaiban Dunia', 'UNESCO', 'Buku tentang keajaiban dari berbagai negara', 18, NULL, NULL),
+(2, 'Bermain dengan Internet Of Things', 'Dhoto', 'Pengenalan tentang IoT & Big Data', 12, NULL, NULL),
+(3, 'Belajar machine Learning untuk Pemula', 'Dicoding', 'Pengenalan pada Machine Learning & AI', 30, NULL, NULL),
+(4, 'Memulai Pemrograman dengan Python', 'Dicoding', 'Belajar Tentang Python', 25, NULL, NULL),
+(5, 'Bussiness Intellegence Data Analyst', 'CodeCademy', 'Everything you need to know about Data Analyst', 20, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -92,6 +103,15 @@ CREATE TABLE `peminjaman` (
   `tanggal_kembali` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `peminjaman`
+--
+
+INSERT INTO `peminjaman` (`id_peminjaman`, `id_pengguna`, `tanggal_pinjam`, `tanggal_kembali`) VALUES
+(1, 1, '2024-01-20', '2024-02-12'),
+(2, 2, '2024-01-01', '2024-02-01'),
+(3, 3, '2023-12-25', '2024-01-01');
+
 -- --------------------------------------------------------
 
 --
@@ -100,8 +120,30 @@ CREATE TABLE `peminjaman` (
 
 CREATE TABLE `peminjaman_buku` (
   `id_peminjaman` int(11) DEFAULT NULL,
-  `id_buku` int(11) DEFAULT NULL
+  `id_buku` int(11) DEFAULT NULL,
+  `jumlah_buku` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `peminjaman_buku`
+--
+
+INSERT INTO `peminjaman_buku` (`id_peminjaman`, `id_buku`, `jumlah_buku`) VALUES
+(1, 1, 4),
+(1, 2, 4),
+(1, 3, 4),
+(1, 4, 4);
+
+--
+-- Triggers `peminjaman_buku`
+--
+DELIMITER $$
+CREATE TRIGGER `pinjambuku` AFTER INSERT ON `peminjaman_buku` FOR EACH ROW BEGIN
+	UPDATE buku SET stok = stok - NEW.jumlah_buku
+	WHERE id_buku = NEW.id_buku;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -110,10 +152,32 @@ CREATE TABLE `peminjaman_buku` (
 --
 
 CREATE TABLE `pengembalian_buku` (
-  `id_pengembalian` int(11) NOT NULL,
   `id_peminjaman` int(11) DEFAULT NULL,
+  `id_buku` int(11) DEFAULT NULL,
+  `jumlah_buku` int(11) DEFAULT NULL,
   `tanggal_pengembalian` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `pengembalian_buku`
+--
+
+INSERT INTO `pengembalian_buku` (`id_peminjaman`, `id_buku`, `jumlah_buku`, `tanggal_pengembalian`) VALUES
+(1, 1, 4, '2024-02-13'),
+(1, 2, 4, '2024-02-13'),
+(1, 3, 4, '2024-02-13'),
+(1, 4, 4, '2024-02-13');
+
+--
+-- Triggers `pengembalian_buku`
+--
+DELIMITER $$
+CREATE TRIGGER `balikin_buku` AFTER INSERT ON `pengembalian_buku` FOR EACH ROW BEGIN
+	UPDATE buku SET stok = stok + NEW.jumlah_buku
+	WHERE id_buku = NEW.id_buku;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -189,7 +253,7 @@ ALTER TABLE `kelas`
 --
 ALTER TABLE `matapelajaran`
   ADD PRIMARY KEY (`idpelajaran`),
-  ADD KEY `namaguru` (`namaguru`);
+  ADD KEY `matapelajaran_ibfk_1` (`namaguru`);
 
 --
 -- Indexes for table `peminjaman`
@@ -203,14 +267,14 @@ ALTER TABLE `peminjaman`
 --
 ALTER TABLE `peminjaman_buku`
   ADD KEY `id_peminjaman` (`id_peminjaman`),
-  ADD KEY `id_buku` (`id_buku`);
+  ADD KEY `peminjmana_buku_ibfk_2` (`id_buku`);
 
 --
 -- Indexes for table `pengembalian_buku`
 --
 ALTER TABLE `pengembalian_buku`
-  ADD PRIMARY KEY (`id_pengembalian`),
-  ADD KEY `id_peminjaman` (`id_peminjaman`);
+  ADD KEY `id_peminjaman` (`id_peminjaman`),
+  ADD KEY `id_buku` (`id_buku`);
 
 --
 -- Indexes for table `siswa`
@@ -245,7 +309,7 @@ ALTER TABLE `kelas`
 -- Constraints for table `matapelajaran`
 --
 ALTER TABLE `matapelajaran`
-  ADD CONSTRAINT `matapelajaran_ibfk_1` FOREIGN KEY (`namaguru`) REFERENCES `guru` (`idguru`);
+  ADD CONSTRAINT `matapelajaran_ibfk_1` FOREIGN KEY (`namaguru`) REFERENCES `guru` (`idguru`) ON UPDATE SET NULL;
 
 --
 -- Constraints for table `peminjaman`
@@ -258,13 +322,14 @@ ALTER TABLE `peminjaman`
 --
 ALTER TABLE `peminjaman_buku`
   ADD CONSTRAINT `peminjaman_buku_ibfk_1` FOREIGN KEY (`id_peminjaman`) REFERENCES `peminjaman` (`id_peminjaman`),
-  ADD CONSTRAINT `peminjaman_buku_ibfk_2` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`);
+  ADD CONSTRAINT `peminjmana_buku_ibfk_2` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`);
 
 --
 -- Constraints for table `pengembalian_buku`
 --
 ALTER TABLE `pengembalian_buku`
-  ADD CONSTRAINT `pengembalian_buku_ibfk_1` FOREIGN KEY (`id_peminjaman`) REFERENCES `peminjaman` (`id_peminjaman`);
+  ADD CONSTRAINT `pengembalian_buku_ibfk_1` FOREIGN KEY (`id_peminjaman`) REFERENCES `peminjaman` (`id_peminjaman`),
+  ADD CONSTRAINT `pengembalian_buku_ibfk_2` FOREIGN KEY (`id_buku`) REFERENCES `buku` (`id_buku`);
 
 --
 -- Constraints for table `siswa`

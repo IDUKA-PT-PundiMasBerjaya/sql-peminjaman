@@ -22,6 +22,7 @@
     <table border="1">
         <h1>Data Buku Perpustakaan</h1>
         <a href="../../perpustakaan/view/tambah.php">| Tambah Buku |</a>
+        <a href="#"> Edit Data |</a>
         <a href="#"> Cetak |</a>
         <a href="../dashboard.php"> Home |</a><br><br>
             <?php 

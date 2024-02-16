@@ -9,7 +9,7 @@
         }
         
         public function deleteGuru($id) {
-            $deletedata = mysqli_query($this->kon, "DELETE FROM guru WHERE id = '$id'");
+            $deletedata = mysqli_query($this->kon, "DELETE FROM guru WHERE idguru = '$id'");
 
             if ($deletedata) {
                 return "The data is succefully deleted";
