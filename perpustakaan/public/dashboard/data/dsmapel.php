@@ -22,7 +22,7 @@
     <table border="1">
         <h1>Data Mata Pelajaran</h1>
         <a href="../../matapelajaran/view/tambah.php">| Tambah Data |</a>
-        <a href="../../matapelajaran/view/ccetak.php" target="_blank"> Cetak |</a>
+        <a href="../../matapelajaran/view/cetak.php" target="_blank"> Cetak |</a>
         <a href="../dashboard.php"> Home |</a>
             <?php 
                 if (isset($_GET['cari'])) {
@@ -36,7 +36,7 @@
         <tr>
             <th> ID </th>
             <th> Mata Pelajaran </th>
-            <th> Nama Guru </th>
+            <th> ID Guru </th>
             <th> Aksi </th>
         </tr>
         <?php 

@@ -27,6 +27,13 @@
             $stok = $data['stok'];
             $matapelajaran = $data['matapelajaran_idpelajaran'];
 
+            $insertData = mysqli_query($this->kon, "INSERT INTO guru(id_buku, judul, penulis, keterangan, stok, matapelajaran_idpelajaran) VALUES ('$id', '$judul', '$penulis', '$keterangan', '$stok', '$matapelajaran')");
+
+			if ($insertData) {
+				return "Data berhasil disimpan.";
+			} else {
+				return "Gagal menyimpan data.";
+			}
         }
     }
 ?>

@@ -54,8 +54,20 @@
             </tr>
             <tr>
                 <td>Mata pelajaran</td>
-                <td><input type="text" name="matapelajaran_idpelajaran"></td>
-            <tr></tr>
+                <td>
+                    <select name="matapelajaran_idpelajaran">
+                        <option value="" disabled selected>Silahkan Pilih</option>
+                            <?php 
+                                $result = mysqli_query($kon, "SELECT idpelajaran, namapelajaran FROM matapelajaran");
+                                while ($row = mysqli_fetch_assoc($result)) {
+                                    if ($row['namapelajaran'] != $selectedPelajaran) {
+                                        echo "<option value='" . $row['idpelajaran'] . "'>" . $row['idpelajaran'] . "</option>";
+                                    }
+                                }
+                            ?>
+                    </select>
+                </td>
+            </tr>
         </table>
         <input type="submit" name="submit" value="Tambah Data">
         <?php if (isset($message)): ?>

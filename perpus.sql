@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2024 at 05:39 AM
+-- Generation Time: Feb 16, 2024 at 10:27 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.0.28
 
@@ -62,6 +62,15 @@ CREATE TABLE `guru` (
   `no_hp` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `guru`
+--
+
+INSERT INTO `guru` (`idguru`, `nama`, `alamat`, `email`, `no_hp`) VALUES
+(1, 'Prof. Enno', 'Batam', 'enno@gmail.com', '081234567890'),
+(2, 'Prof. Alief', 'Batam', 'monb04973@gmail.com', '085264562334'),
+(3, 'Pak Wahid', 'Batam', 'muhammadabdulrahmanwahid@gmail.com', '080987654321');
+
 -- --------------------------------------------------------
 
 --
@@ -89,6 +98,14 @@ CREATE TABLE `matapelajaran` (
   `namapelajaran` varchar(100) DEFAULT NULL,
   `namaguru` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `matapelajaran`
+--
+
+INSERT INTO `matapelajaran` (`idpelajaran`, `namapelajaran`, `namaguru`) VALUES
+(1, 'Robotika', 1),
+(2, 'Informatika', 2);
 
 -- --------------------------------------------------------
 
@@ -199,9 +216,7 @@ CREATE TABLE `siswa` (
 --
 
 INSERT INTO `siswa` (`idsiswa`, `nama`, `alamat`, `email`, `no_hp`, `id_user`) VALUES
-(111, 'Alief', 'Buana Regency', 'alief@gmail.com', '085264562334', 1),
-(112, 'Enno', 'Griya KPN', 'enno@gmail.com', '081234567890', 2),
-(113, 'Nur', 'Batu Besar', 'nur@gmail.com', '080987654321', 3);
+(111, 'Alief', 'Buana Regency', 'alief@gmail.com', '085264562334', 1);
 
 -- --------------------------------------------------------
 
@@ -297,7 +312,7 @@ ALTER TABLE `users`
 -- Constraints for table `buku`
 --
 ALTER TABLE `buku`
-  ADD CONSTRAINT `buku_ibfk_1` FOREIGN KEY (`matapelajaran_idpelajaran`) REFERENCES `matapelajaran` (`idpelajaran`);
+  ADD CONSTRAINT `buku_ibfk_1` FOREIGN KEY (`matapelajaran_idpelajaran`) REFERENCES `matapelajaran` (`idpelajaran`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `kelas`
@@ -309,7 +324,7 @@ ALTER TABLE `kelas`
 -- Constraints for table `matapelajaran`
 --
 ALTER TABLE `matapelajaran`
-  ADD CONSTRAINT `matapelajaran_ibfk_1` FOREIGN KEY (`namaguru`) REFERENCES `guru` (`idguru`) ON UPDATE SET NULL;
+  ADD CONSTRAINT `matapelajaran_ibfk_1` FOREIGN KEY (`namaguru`) REFERENCES `guru` (`idguru`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Constraints for table `peminjaman`
