@@ -21,13 +21,13 @@
     ?>
     <table border="1">
         <h1>Data Buku Perpustakaan</h1>
-        <a href="#">| Tambah Buku |</a>
+        <a href="../../perpustakaan/view/tambah.php">| Tambah Buku |</a>
         <a href="#"> Cetak |</a>
         <a href="../dashboard.php"> Home |</a><br><br>
             <?php 
                 if (isset($_GET['cari'])) {
                     $cari = $_GET['cari'];
-                    $ambildata = "SELECT * FROM buku WHERE judul LIKE '%".$cari."%' OR penulis LIKE '%".$cari."%'";
+                    $ambildata = mysqli_query($kon, "SELECT * FROM buku WHERE id_buku LIKE '%".$cari."%' OR judul LIKE '%".$cari."%' OR penulis LIKE '%".$cari."%'");
                 } else {
                     $ambildata = mysqli_query($kon, "SELECT * FROM buku ORDER BY 'id_buku' ASC");
                     $num = mysqli_num_rows($ambildata);

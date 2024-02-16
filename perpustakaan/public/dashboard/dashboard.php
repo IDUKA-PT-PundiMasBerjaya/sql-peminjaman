@@ -21,7 +21,7 @@
 <body>
     <h2>Halaman utama <?php echo $username; ?>!</h2>
     <a href="data/dsperpustakaan.php">| Perpustakaan |</a>
-    <a href="#">Data Guru |</a>
+    <a href="data/dsguru.php">Data Guru |</a>
     <a href="#">Data Siswa |</a>
 
 </body>

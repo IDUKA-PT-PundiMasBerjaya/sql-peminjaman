@@ -1,0 +1,31 @@
+<?php 
+    include_once("../../../config/koneksi.php");
+
+    class GuruController {
+        private $kon;
+
+        public function __construct($connection) {
+            $this->kon = $connection;
+        }
+
+        public function tambahGuru() {
+            $setAuto = mysqli_query($this->kon, "SELECT MAX(id) AS max_id FROM guru");
+            $result = mysqli_fetch_assoc($setAuto);
+            $max_id = $result['max_id'];
+
+            if (is_numeric($max_id)) {
+                $nounik = $max_id + 1;
+            } else {
+                $nounik = 1;
+            } return $nounik;
+        }
+
+        public function tambahDataGuru($data) {
+            $id = $data['id'];
+            $nama = $data['nama'];
+            $alamat = $data['alamat'];
+            $email = $data['email'];
+            $no_hp = $data['no_hp'];
+        }
+    }
+?>
