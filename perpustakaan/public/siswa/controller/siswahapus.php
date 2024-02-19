@@ -9,7 +9,7 @@
         }
 
         public function deleteSiswa($id) {
-            $deletedata = mysqli_query($this->kon, "DELETE FROM siswa WHERE idsiswa = '$id'");
+            $deletedata = mysqli_query($this->kon, "DELETE FROM siswa WHERE id = '$id'");
 
             if ($deletedata) {
                 return "Data sukses terhapus";

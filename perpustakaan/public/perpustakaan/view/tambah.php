@@ -8,12 +8,11 @@
         $id = $bukuController->tambahBuku();
 
         $data = [
-            'id_buku' => $id,
+            'id' => $id,
             'judul' => $_POST['judul'],
             'penulis' => $_POST['penulis'],
             'keterangan' => $_POST['keterangan'],
             'stok' => $_POST['stok'],
-            'matapelajaran_idpelajaran' => $_POST['matapelajaran_idpelajaran'],
         ];
 
         $message = $bukuController->tambahDataBuku($data);
@@ -51,22 +50,6 @@
             <tr>
                 <td>Stok</td>
                 <td><input type="text" name="stok" required></td>
-            </tr>
-            <tr>
-                <td>Mata pelajaran</td>
-                <td>
-                    <select name="matapelajaran_idpelajaran">
-                        <option value="" disabled selected>Silahkan Pilih</option>
-                            <?php 
-                                $result = mysqli_query($kon, "SELECT idpelajaran, namapelajaran FROM matapelajaran");
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    if ($row['namapelajaran'] != $selectedPelajaran) {
-                                        echo "<option value='" . $row['idpelajaran'] . "'>" . $row['idpelajaran'] . "</option>";
-                                    }
-                                }
-                            ?>
-                    </select>
-                </td>
             </tr>
         </table>
         <input type="submit" name="submit" value="Tambah Data">

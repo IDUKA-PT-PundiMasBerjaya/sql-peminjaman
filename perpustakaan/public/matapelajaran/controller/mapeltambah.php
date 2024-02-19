@@ -9,7 +9,7 @@
         }
 
         public function tambahMapel() {
-            $setAuto = mysqli_query($this->kon, "SELECT MAX(idpelajaran) AS max_id FROM matapelajaran");
+            $setAuto = mysqli_query($this->kon, "SELECT MAX(id) AS max_id FROM matapelajaran");
             $result = mysqli_fetch_assoc($setAuto);
             $max_id = $result['max_id'];
 
@@ -21,14 +21,14 @@
         }
 
         public function tambahDataMapel($data) {
-            $id = $data['idpelajaran'];
+            $id = $data['id'];
             $namapelajaran = $data['namapelajaran'];
             $namaguru = $data['namaguru'];
 
-            $insertData = mysqli_query($this->kon, "INSERT INTO matapelajaran(idpelajaran, namapelajaran, namaguru) VALUES ('$id', '$namapelajaran', '$namaguru')");
+            $insertData = mysqli_query($this->kon, "INSERT INTO matapelajaran(id, namapelajaran, namaguru) VALUES ('$id', '$namapelajaran', '$namaguru')");
 
             if ($insertData) {
-                return "Data berhassil disimpan";
+                return "Data berhasil disimpan";
             } else {
                 return "Gagal menyimpan data";
             }

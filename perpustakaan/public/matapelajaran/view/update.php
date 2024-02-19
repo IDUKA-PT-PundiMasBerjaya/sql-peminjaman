@@ -5,7 +5,7 @@
     $mapelController = new MapelController($kon);
 
     if (isset($_POST['update'])) {
-        $id = $_POST['idpelajaran'];
+        $id = $_POST['id'];
         $namapelajaran = $_POST['namapelajaran'];
         $namaguru = $_POST['namaguru'];
 
@@ -24,7 +24,7 @@
         $result = $mapelController->getDataMapel($id);
 
         if ($result) {
-            $id = $result['idpelajaran'];
+            $id = $result['id'];
             $namapelajaran = $result['namapelajaran'];
             $namaguru = $result['namaguru'];
         } else {
@@ -54,19 +54,7 @@
             </tr>
             <tr>
                 <td>ID Guru</td>
-                <td>
-                    <select name="namaguru">
-                        <option value="" disabled selected>Silahkan Pilih</option>
-                            <?php 
-                                $result = mysqli_query($kon, "SELECT idguru, nama FROM guru");
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    if ($row['nama'] != $selectedGuru) {
-                                        echo "<option value='" . $row['idguru'] . "'>" . $row['idguru'] . "</option>";
-                                    }
-                                }
-                            ?>
-                    </select>
-                </td>
+                <td><input type="text" name="namaguru" value="<?php echo $namaguru; ?>"</td>
             </tr>
             <tr>
                 <td><input type="hidden" name="id" value="<?php echo $id; ?>"></td>

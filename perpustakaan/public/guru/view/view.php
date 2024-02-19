@@ -19,7 +19,7 @@
             <tr>
                 <td>ID Guru</td>
                 <td>: </td>
-                <td><?php echo $idguru; ?></td>
+                <td><?php echo $id; ?></td>
             </tr>
             <tr>
                 <td>Nama Guru</td>

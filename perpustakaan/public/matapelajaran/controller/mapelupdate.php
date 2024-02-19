@@ -9,7 +9,7 @@
         }
 
         public function updateMapel($id, $namapelajaran, $namaguru) {
-            $result = mysqli_query($this->kon, "UPDATE matapelajaran SET namapelajaran = '$namapelajaran', namaguru = '$namaguru' WHERE idpelajaran = '$id'");
+            $result = mysqli_query($this->kon, "UPDATE matapelajaran SET namapelajaran = '$namapelajaran', namaguru = '$namaguru' WHERE id = '$id'");
 
             if ($result) {
                 return "Sukses meng-update data";
@@ -19,7 +19,7 @@
         }
 
         public function getDataMapel($id) {
-            $sql = "SELECT * FROM matapelajaran WHERE idpelajaran = '$id'";
+            $sql = "SELECT * FROM matapelajaran WHERE id = '$id'";
             $ambilData = $this->kon->query($sql);
 
             IF ($result = mysqli_fetch_array($ambilData)) {

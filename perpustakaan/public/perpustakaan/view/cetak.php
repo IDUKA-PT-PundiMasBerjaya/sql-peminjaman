@@ -7,26 +7,32 @@
 
 	$pdf->SetFont('Times', 'B', 13);
 	$pdf->Cell(0, 15, '', 0, 1);
-	$pdf->Cell(250, 10, 'Data Mata Pelajaran', 0, 0, 'R');
+	$pdf->Cell(250, 10, 'Data Buku Perpustakaan', 0, 0, 'R');
 
 	$pdf->Cell(10, 17, '', 0, 1);	
 	$pdf->SetFont('Times', 'B', 9);
 	$pdf->Cell(10, 7, 'NO', 1, 0, 'C');
-	$pdf->Cell(30, 7, 'Id Mata Pelajaran', 1, 0, 'C');
-	$pdf->Cell(90, 7, 'Nama Mata pelajaran', 1, 0, 'C');
-	$pdf->Cell(50, 7, 'ID Guru', 1, 0, 'C');
+	$pdf->Cell(70, 7, 'Judul Buku', 1, 0, 'C');
+	$pdf->Cell(40, 7, 'Penulis', 1, 0, 'C');
+	$pdf->Cell(80, 7, 'Keterangan', 1, 0, 'C');
+	$pdf->Cell(20, 7, 'Stok', 1, 0, 'C');
+	$pdf->Cell(30, 7, 'Gambar', 1, 0, 'C');
+	$pdf->Cell(28, 7, 'ID Mata Pelajaran', 1, 0, 'C');
 
 	$pdf->Cell(10, 7, '', 0, 1);
 	$pdf->SetFont('Times', '', 10);
 
 	$no = 1;
-	$data = mysqli_query($kon, "SELECT * FROM matapelajaran ORDER BY idpelajaran ASC");
+	$data = mysqli_query($kon, "SELECT * FROM buku ORDER BY id ASC");
 
 	while ($d = mysqli_fetch_array($data)) {
 		$pdf->Cell(10, 6, $no++, 1, 0, 'C');
-		$pdf->Cell(30, 6, $d['idpelajaran'], 1, 0, 'C');
-		$pdf->Cell(90, 6, $d['namapelajaran'], 1, 0, 'C');
-		$pdf->Cell(50, 6, $d['namaguru'], 1, 1, 'C');
+		$pdf->Cell(70, 6, $d['judul'], 1, 0, 'C');
+		$pdf->Cell(40, 6, $d['penulis'], 1, 0, 'C');
+		$pdf->Cell(80, 6, $d['keterangan'], 1, 0, 'C');
+		$pdf->Cell(20, 6, $d['stok'], 1, 0, 'C');
+		$pdf->Cell(30, 6, $d['gambar'], 1, 0, 'C');
+		$pdf->Cell(28, 6, $d['matapelajaran_idpelajaran'], 1, 0, 'C');
         $pdf->Ln();
 	}
 

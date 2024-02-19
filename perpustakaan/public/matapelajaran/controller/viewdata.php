@@ -9,7 +9,7 @@
         }
 
         public function getMapelData($id) {
-            $result = mysqli_query($this->kon, "SELECT * FROM matapelajaran WHERE idpelajaran = '$id'");
+            $result = mysqli_query($this->kon, "SELECT * FROM matapelajaran WHERE id = '$id'");
             return mysqli_fetch_array($result);
         }
     }
@@ -19,7 +19,7 @@
     $mapelData = $kelasController->getMapelData($id);
 
     if ($mapelData) {
-        $id = $mapelData['idpelajaran'];
+        $id = $mapelData['id'];
         $namapelajaran = $mapelData['namapelajaran'];
         $namaguru = $mapelData['namaguru'];
     }

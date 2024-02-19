@@ -8,12 +8,11 @@
         $id = $siswaController->tambahSiswa();
 
         $data = [
-            'idsiswa' => $id,
+            'id' => $id,
             'nama' => $_POST['nama'],
             'alamat' => $_POST['alamat'],
             'email' => $_POST['email'],
             'no_hp' => $_POST['no_hp'],
-            'id_user' => $_POST['id_user']
         ];
 
         $message = $siswaController->tambahDataSiswa($data);
@@ -50,22 +49,6 @@
             <tr>
                 <td> No. HP </td>
                 <td><input type="text" name="no_hp" required></td>
-            </tr>
-            <tr>
-                <td> ID User </td>
-                <td>
-                    <select name="id_user">
-                        <option value="" disabled selected>Silahkan Pilih</option>
-                            <?php 
-                                $result = mysqli_query($kon, "SELECT id, username FROM users");
-                                while ($row = mysqli_fetch_assoc($result)) {
-                                    if ($row['username'] != $selectedGuru) {
-                                        echo "<option value='" . $row['username'] . "'>" . $row['username'] . "</option>";
-                                    }
-                                }
-                            ?>
-                    </select>
-                </td>
             </tr>
         </table>
         <input type="submit" name="submit" value="Tambah Data">

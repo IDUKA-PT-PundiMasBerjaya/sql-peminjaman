@@ -27,9 +27,9 @@
             <?php 
                 if (isset($_GET['cari'])) {
                     $cari = $_GET['cari'];
-                    $ambildata = mysqli_query($kon, "SELECT * FROM matapelajaran WHERE idpelajaran LIKE '%" .$cari."%' OR namapelajaran LIKE '%" .$cari. "%'");
+                    $ambildata = mysqli_query($kon, "SELECT * FROM matapelajaran WHERE id LIKE '%" .$cari."%' OR namapelajaran LIKE '%" .$cari. "%'");
                 } else{
-                    $ambildata = mysqli_query($kon, "SELECT * FROM matapelajaran ORDER BY 'idpelajaran' ASC");
+                    $ambildata = mysqli_query($kon, "SELECT * FROM matapelajaran ORDER BY 'id' ASC");
                     $num = mysqli_num_rows($ambildata);
                 }
             ?>
@@ -42,13 +42,13 @@
         <?php 
             while ($userAmbilData = mysqli_fetch_array($ambildata)) {
                 echo "<tr>";
-                    echo "<td>" . $id = $userAmbilData['idpelajaran'] . "</td>";
+                    echo "<td>" . $id = $userAmbilData['id'] . "</td>";
                     echo "<td>" . $namapelajaran = $userAmbilData['namapelajaran'] ."</td>";
                     echo "<td>" . $namaguru = $userAmbilData['namaguru'] . "</td>";
                     echo "<td>
-                            <a href='../../matapelajaran/view/view.php?id=" . $userAmbilData['idpelajaran'] . "'>View</a> |
-                            <a href='../../matapelajaran/view/update.php?id=" . $userAmbilData['idpelajaran'] . "'>Edit</a> |
-                            <a href='../../matapelajaran/controller/mapelhapus.php?id=" . $userAmbilData['idpelajaran'] . "'>Hapus</a>
+                            <a href='../../matapelajaran/view/view.php?id=" . $userAmbilData['id'] . "'>View</a> |
+                            <a href='../../matapelajaran/view/update.php?id=" . $userAmbilData['id'] . "'>Edit</a> |
+                            <a href='../../matapelajaran/controller/mapelhapus.php?id=" . $userAmbilData['id'] . "'>Hapus</a>
                         </td>";
                 echo "</tr>";
             }

@@ -9,17 +9,17 @@
         }
 
         public function getBukuData($id) {
-            $result = mysqli_query($this->kon, "SELECT * FROM buku WHERE id_buku = '$id'");
+            $result = mysqli_query($this->kon, "SELECT * FROM buku WHERE id = '$id'");
             return mysqli_fetch_array($result);
         }
     }
 
     $perpusController = new BukuController($kon);
-    $id = $_GET['id_buku'];
+    $id = $_GET['id'];
     $bukuData = $perpusController->getBukuData($id);
 
     if ($bukuData) {
-        $id = $bukuData['id_buku'];
+        $id = $bukuData['id'];
         $judul = $bukuData['judul'];
         $penulis = $bukuData['penulis'];
         $keterangan = $bukuData['keterangan'];

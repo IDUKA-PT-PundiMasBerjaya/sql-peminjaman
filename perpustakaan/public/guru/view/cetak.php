@@ -22,11 +22,11 @@
 	$pdf->SetFont('Times', '', 10);
 
 	$no = 1;
-	$data = mysqli_query($kon, "SELECT * FROM guru ORDER BY idguru ASC");
+	$data = mysqli_query($kon, "SELECT * FROM guru ORDER BY id ASC");
 
     while ($d = mysqli_fetch_array($data)) {
 		$pdf->Cell(10, 6, $no++, 1, 0, 'C');
-		$pdf->Cell(20, 6, $d['idguru'], 1, 0, 'C');
+		$pdf->Cell(20, 6, $d['id'], 1, 0, 'C');
 		$pdf->Cell(40, 6, $d['nama'], 1, 0, 'C');
 		$pdf->Cell(40, 6, $d['alamat'], 1, 0, 'C');
 		$pdf->Cell(80, 6, $d['email'], 1, 0, 'C');

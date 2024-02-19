@@ -9,7 +9,7 @@
         }
 
         public function tambahSiswa() {
-            $setAuto = mysqli_query($this->kon, "SELECT MAX(idsiswa) AS max_id FROM siswa");
+            $setAuto = mysqli_query($this->kon, "SELECT MAX(id) AS max_id FROM siswa");
             $result = mysqli_fetch_assoc($setAuto);
             $max_id = $result['max_id'];
 
@@ -21,14 +21,13 @@
         }
 
         public function tambahDataSiswa($data) {
-            $id = $data['idsiswa'];
+            $id = $data['id'];
             $nama = $data['nama'];
             $alamat = $data['alamat'];
             $email = $data['email'];
             $no_hp = $data['no_hp'];
-            $id_user = $data['id_user'];
 
-            $insertData = mysqli_query($this->kon, "INSERT INTO guru(idsiswa, nama, alamat, email, no_hp, id_user) VALUES ('$id', '$nama', '$alamat', '$email', '$no_hp', '$id_user')");
+            $insertData = mysqli_query($this->kon, "INSERT INTO siswa(id, nama, alamat, email, no_hp) VALUES ('$id', '$nama', '$alamat', '$email', '$no_hp')");
 
 			if ($insertData) {
 				return "Data berhasil disimpan.";

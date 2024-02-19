@@ -22,15 +22,14 @@
     <table border="1">
         <h1>Data Buku Perpustakaan</h1>
         <a href="../../perpustakaan/view/tambah.php">| Tambah Buku |</a>
-        <a href="#"> Edit Data |</a>
-        <a href="#"> Cetak |</a>
+        <a href="../../perpustakaan/view/cetak.php" target="_blank"> Cetak |</a>
         <a href="../dashboard.php"> Home |</a><br><br>
             <?php 
                 if (isset($_GET['cari'])) {
                     $cari = $_GET['cari'];
-                    $ambildata = mysqli_query($kon, "SELECT * FROM buku WHERE id_buku LIKE '%".$cari."%' OR judul LIKE '%".$cari."%' OR penulis LIKE '%".$cari."%'");
+                    $ambildata = mysqli_query($kon, "SELECT * FROM buku WHERE id LIKE '%".$cari."%' OR judul LIKE '%".$cari."%' OR penulis LIKE '%".$cari."%'");
                 } else {
-                    $ambildata = mysqli_query($kon, "SELECT * FROM buku ORDER BY 'id_buku' ASC");
+                    $ambildata = mysqli_query($kon, "SELECT * FROM buku ORDER BY 'id' ASC");
                     $num = mysqli_num_rows($ambildata);
                 }
             ?>
@@ -47,7 +46,7 @@
         <?php 
             while ($userAmbilData = mysqli_fetch_array($ambildata)) {
                 echo "<tr>";
-                echo "<td>" . $id = $userAmbilData['id_buku'] . "</td>";
+                echo "<td>" . $id = $userAmbilData['id'] . "</td>";
                 echo "<td>" . $judul = $userAmbilData['judul'] . "</td>";
                 echo "<td>" . $penulis = $userAmbilData['penulis'] . "</td>";
                 echo "<td>" . $keterangan = $userAmbilData['keterangan'] . "</td>";
@@ -56,10 +55,10 @@
                 echo "<td>" . $mata_pelajaran = $userAmbilData['matapelajaran_idpelajaran'] . "</td>";
 
                 echo "<td> 
-                    | <a href='../../perpustakaan/view/pinjam.php?id_buku=" .$userAmbilData['id_buku']. "'>Pinjam Buku</a> | 
-                    <a href='../../perpustakaan/view/view.php?id_buku=" .$userAmbilData['id_buku']. "'>View</a> |
-                    <a href='../../perpustakaan/controller/bukuhapus.php?id_buku=" .$userAmbilData['id_buku']. "'>Hapus</a> |
-                
+                    | <a href='../../perpustakaan/view/pinjam.php?id=" .$userAmbilData['id']. "'>Pinjam Buku</a> | 
+                    <a href='../../perpustakaan/view/update.php?id=" .$userAmbilData['id']. "'>Update</a> |
+                    <a href='../../perpustakaan/view/view.php?id=" .$userAmbilData['id']. "'>View</a> |
+                    <a href='../../perpustakaan/controller/bukuhapus.php?id=" .$userAmbilData['id']. "'>Hapus</a> |
                     </td>";
                     
             }

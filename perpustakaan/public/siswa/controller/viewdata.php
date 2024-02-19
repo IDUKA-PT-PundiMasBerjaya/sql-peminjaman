@@ -4,12 +4,13 @@
     class SiswaController {
         private $kon;
 
+
         public function __construct($connection) {
             $this->kon = $connection;
         }
 
         public function getSiswaData($id) {
-            $result = mysqli_query($this->kon, "SELECT * FROM siswa WHERE idsiswa = '$id'");
+            $result = mysqli_query($this->kon, "SELECT * FROM siswa WHERE id = '$id'");
             return mysqli_fetch_array($result);
         }
     }
@@ -19,7 +20,7 @@
     $siswaData = $kelasController->getSiswaData($id);
 
     if ($siswaData) {
-        $id = $siswaData['idsiswa'];
+        $idsiswa = $siswaData['id'];
         $nama = $siswaData['nama'];
         $alamat = $siswaData['alamat'];
         $email = $siswaData['email'];

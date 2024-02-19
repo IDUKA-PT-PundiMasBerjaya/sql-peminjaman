@@ -5,7 +5,7 @@
     $guruController = new GuruController($kon);
 
     if (isset($_POST['update'])) {
-        $id = $_POST['idguru'];
+        $id = $_POST['id'];
         $nama = $_POST['nama'];
         $alamat = $_POST['alamat'];
         $email = $_POST['email'];
@@ -28,7 +28,7 @@
         $result = $guruController->getDataGuru($id);
 
         if ($result) {
-            $id = $result['idguru'];
+            $id = $result['id'];
             $nama = $result['nama'];
             $alamat = $result['alamat'];
             $email = $result['email'];

@@ -10,7 +10,7 @@
         }
 
         public function getGuruData($id) {
-            $result = mysqli_query($this->kon, "SELECT * FROM guru WHERE idguru = '$id'");
+            $result = mysqli_query($this->kon, "SELECT * FROM guru WHERE id = '$id'");
             return mysqli_fetch_array($result);
         }
     }
@@ -20,7 +20,7 @@
     $guruData = $kelasController->getGuruData($id);
 
     if ($guruData) {
-        $idguru = $guruData['idguru'];
+        $idguru = $guruData['id'];
         $nama = $guruData['nama'];
         $alamat = $guruData['alamat'];
         $email = $guruData['email'];

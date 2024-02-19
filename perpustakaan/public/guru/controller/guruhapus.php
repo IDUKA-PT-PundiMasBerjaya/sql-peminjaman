@@ -1,15 +1,15 @@
 <?php 
     include_once("../../../config/koneksi.php");
 
-    class GuruController {
+    class BukuController {
         private $kon;
 
         public function __construct($connection) {
             $this->kon = $connection;
         }
         
-        public function deleteGuru($id) {
-            $deletedata = mysqli_query($this->kon, "DELETE FROM guru WHERE idguru = '$id'");
+        public function deleteBuku($id) {
+            $deletedata = mysqli_query($this->kon, "DELETE FROM guru WHERE id = '$id'");
 
             if ($deletedata) {
                 return "The data is succefully deleted";
@@ -19,10 +19,10 @@
         }
     }
 
-    $kelasController = new GuruController($kon);
+    $perpusController = new BukuController($kon);
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $message = $kelasController->deleteGuru($id);
+        $message = $perpusController->deleteBuku($id);
         echo $message;
         header("Location: ../../dashboard/data/dsguru.php");
     }

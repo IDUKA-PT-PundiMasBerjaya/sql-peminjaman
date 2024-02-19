@@ -1,15 +1,15 @@
 <?php  
 	include_once("../../../config/koneksi.php");
  
-	class SiswaController {
+	class KelasController {
 		private $kon;
 
 		public function __construct($connection) {
 			$this->kon = $connection;
 		}
 
-		public function updateSiswa($id, $nama, $alamat, $email, $no_hp) {
-			$result = mysqli_query($this->kon, "UPDATE siswa SET nama = '$nama', alamat = '$alamat', email = '$email', no_hp = '$no_hp' WHERE id = '$id'");
+		public function updateKelas($id, $namakelas, $walikelas, $ketuakelas, $kursi, $meja) {
+			$result = mysqli_query($this->kon, "UPDATE kelas SET namakelas = '$namakelas', walikelas = '$walikelas', ketuakelas = '$ketuakelas', kursi = '$kursi', meja = '$meja' WHERE id = '$id'");
 
 			if ($result) {
 				return "Sukses meng-update data.";
@@ -18,8 +18,8 @@
 			}
 		}
 
-		public function GetDataSiswa($id) {
-			$sql = "SELECT * FROM siswa WHERE id = '$id'";
+		public function getDataKelas($id) {
+			$sql = "SELECT * FROM kelas WHERE id = '$id'";
 			$ambildata = $this->kon->query($sql);
 
 			if ($result = mysqli_fetch_array($ambildata)) {
