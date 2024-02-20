@@ -21,7 +21,9 @@
 <body>
     <h2>Halaman utama <?php echo $username; ?>!</h2> 
 
-    | <a href="#"> Balikin Buku </a>|<br><br>
+    | <a href="#"> Balikin Buku </a>|
+    <a href="data/dspeminjaman.php"> Data Peminjaman </a>|
+    <br><br>
 
     | <a href="data/dsperpustakaan.php"> Perpustakaan </a>|
     <a href="data/dsguru.php"> Data Guru </a>|
